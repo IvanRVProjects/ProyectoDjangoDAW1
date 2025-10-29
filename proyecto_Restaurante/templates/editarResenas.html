@@ -1,0 +1,31 @@
+{% extends 'base.html' %} 
+{% load  static %}
+{% block content %}
+    
+    <h1 style="padding: 5%; padding-bottom:1%;font-family: 'Italianno', cursive; color: #D4A373">Historial de Reseñas</h1>
+    <div class="historial_pedidos">
+        {% for r in resenas %}
+            <div class="historial_pedidos_content">
+                <h4>{{ r.usuario }}</h4>
+                <h6>{{ r.fecha_creacion }}</h6>
+            
+                <a>{{ r.comentarios }}</a>
+                
+                <p><b>Puntuacion: {{ r.puntuacion }}</b></p>
+            
+                <a href="{% url 'edit_resena' id=r.id %}">
+                    <button class="editar_empleado_btn"><img src="{% static 'images/editar_Admin.png' %}"></button>
+                </a>
+            
+                <a href="{% url 'eliminar_resena' id=r.id %}">
+                    <button class="eliminar_empleado_btn"><img src="{% static 'images/borrar_Admin.png' %}"></button>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+    
+        <a href="{% url 'new_resena' %}">
+            <button class="crear_empleado_btn">Añadir Reseña</button>
+        </a>
+
+{% endblock %}

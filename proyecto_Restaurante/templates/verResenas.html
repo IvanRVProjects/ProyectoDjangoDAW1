@@ -1,0 +1,33 @@
+{% extends 'base.html' %} 
+{% load  static %}
+{% block content %}
+    
+    <h1 style="padding: 5%; padding-bottom:1%;font-family: 'Italianno', cursive; color: #D4A373; font-size: 50px">Historial de Reseñas</h1>
+    <div class="historial_pedidos" style="margin: 0 5%">
+        {% for r in resenas %}
+            <div class="historial_pedidos_content">
+                <div class="d-flex align-items-center" style="justify-content: flex-start !important; margin-bottom: 2%">
+                    {% if r.usuario.foto %}
+                        <img src="{{ r.usuario.foto.url }}" alt="Foto de perfil" class="rounded-circle me-2" style="width: 50px; height: 50px; object-fit: cover;">
+                    {% endif %}
+                    <h4>{{ r.usuario.nombre }}</h4>
+                </div>
+                <h6>{{ r.fecha_creacion }}</h6>
+            
+                <a>{{ r.comentarios }}</a>
+                
+                <p><b>Puntuacion: {{ r.puntuacion }}</b></p>
+            </div>
+        {% endfor %}
+    </div>
+    {% if user.is_authenticated %}
+        <div class="botones_resenas" style="text-align: center;">
+            <a href="{% url 'new_resena' %}">
+                <button class="crear_empleado_btn">Añadir Reseña</button>
+            </a>
+            <a href="{% url 'misResenas' %}">
+                <button class="crear_empleado_btn">Editar mis Reseñas</button>
+            </a>
+        </div>
+    {% endif %}
+{% endblock %}
